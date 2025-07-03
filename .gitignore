@@ -1,0 +1,25 @@
+# Node
+node_modules/
+pnpm-lock.yaml
+
+# Rust
+/target/
+
+# Tauri
+/src-tauri/target
+/src-tauri/.cargo
+
+# IDEs
+.idea/
+.vscode/
+.DS_Store
+
+# Builds
+/dist/
+/packages/frontend/dist/
+
+# Env
+.env
+.env.*
+!*.example
+
