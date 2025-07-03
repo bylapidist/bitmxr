@@ -14,6 +14,7 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 8
+          cache: 'pnpm'
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
@@ -23,7 +24,30 @@ jobs:
           toolchain: stable
           components: clippy
           profile: minimal
-      - run: pnpm install
+      - name: Cache Cargo registry
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('src-tauri/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-registry-
+      - name: Cache Cargo build
+        uses: actions/cache@v3
+        with:
+          path: src-tauri/target
+          key: ${{ runner.os }}-cargo-build-${{ hashFiles('src-tauri/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-build-
+      - name: Cache Playwright browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('packages/frontend/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+      - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm --filter frontend test -- --run
       - run: pnpm --filter frontend exec playwright install --with-deps
