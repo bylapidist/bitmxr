@@ -12,7 +12,7 @@ tauri = { version = "1", features = ["api-all"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 tracing = "0.1"
-cpal = "0.15"
+cpal = "0.16"
 
 [dev-dependencies]
 serde_json = "1"
