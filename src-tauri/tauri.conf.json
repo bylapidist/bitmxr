@@ -1,0 +1,24 @@
+{
+  "build": {
+    "beforeBuildCommand": "pnpm --filter frontend build",
+    "beforeDevCommand": "pnpm --filter frontend dev",
+    "devPath": "http://localhost:5173",
+    "distDir": "../packages/frontend/dist"
+  },
+  "package": {
+    "productName": "Bitmxr",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "windows": [
+      {
+        "title": "Bitmxr",
+        "width": 1200,
+        "height": 800
+      }
+    ],
+    "allowlist": {
+      "all": true
+    }
+  }
+}
