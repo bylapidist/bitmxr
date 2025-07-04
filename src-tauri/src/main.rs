@@ -1,9 +1,11 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+#[cfg(not(test))]
 use tauri::Manager;
 
+#[cfg(not(test))]
 use bitmxr::{audio_engine::AudioEngine, get_audio_stats};
-
+#[cfg(not(test))]
 fn main() {
     tauri::Builder::default()
         .manage(AudioEngine::default())
