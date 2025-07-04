@@ -1,14 +1,12 @@
 import { Button } from '@mantine/core';
 import { invoke } from '@tauri-apps/api/tauri';
 import { useState } from 'react';
-import { useStore } from '../state/useStore';
+import TrackList from '../components/TrackList';
+import Mixer from '../components/Mixer';
 
 export default function Home() {
   const [stats, setStats] = useState<string>('');
   const [devices, setDevices] = useState<string[]>([]);
-  const tracks = useStore((state) => state.tracks);
-  const addTrack = useStore((state) => state.addTrack);
-  const removeTrack = useStore((state) => state.removeTrack);
 
   async function getStats() {
     const result = await invoke<string>('get_audio_stats');
@@ -33,20 +31,9 @@ export default function Home() {
           ))}
         </ul>
       )}
-      <div className="mt-4">
-        <Button onClick={() => addTrack({ id: Date.now().toString(), name: `Track ${tracks.length + 1}` })}>
-          Add Track
-        </Button>
-        <ul className="mt-2 list-disc pl-4">
-          {tracks.map((t) => (
-            <li key={t.id}>
-              {t.name}{' '}
-              <Button size="xs" variant="subtle" onClick={() => removeTrack(t.id)}>
-                remove
-              </Button>
-            </li>
-          ))}
-        </ul>
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <TrackList />
+        <Mixer />
       </div>
     </div>
   );

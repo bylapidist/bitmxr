@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import Home from './home';
-import { BrowserRouter } from 'react-router-dom';
+import TrackList from './TrackList';
 import { useStore } from '../state/useStore';
 
-const meta: Meta<typeof Home> = {
-  title: 'Pages/Home',
-  component: Home,
+const meta: Meta<typeof TrackList> = {
+  title: 'Components/TrackList',
+  component: TrackList,
   decorators: [
     (Story) => {
       useStore.setState({
@@ -14,14 +13,10 @@ const meta: Meta<typeof Home> = {
           { id: '2', name: 'Track 2' },
         ],
       });
-      return (
-        <BrowserRouter>
-          <Story />
-        </BrowserRouter>
-      );
+      return <Story />;
     },
   ],
 };
 
 export default meta;
-export const Default: StoryObj<typeof Home> = {};
+export const Default: StoryObj<typeof TrackList> = {};
