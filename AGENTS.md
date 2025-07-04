@@ -27,8 +27,9 @@ pnpm install
 pnpm --filter frontend exec playwright install
 ```
 
-No icon file is stored in the repo. The build script will generate a minimal icon at
-`src-tauri/icons/icon.png` automatically.
+No icon files are stored in the repo. The build script will generate minimal
+icons at `src-tauri/icons/icon.png` and `src-tauri/icons/icon.ico`
+automatically.
 
 After setup the full check suite is:
 
