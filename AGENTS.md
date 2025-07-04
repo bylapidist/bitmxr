@@ -5,7 +5,13 @@ container run the following before running tests or builds:
 
 ```bash
 apt-get update
-apt-get install -y libwebkit2gtk-4.1-dev libjavascriptcoregtk-4.1-dev libgtk-3-dev libayatana-appindicator3-dev
+apt-get install -y \
+  libwebkit2gtk-4.1-dev \
+  libjavascriptcoregtk-4.1-dev \
+  libgtk-3-dev \
+  libayatana-appindicator3-dev \
+  libsoup2.4-dev \
+  libasound2-dev
 # Provide compatibility for crates expecting 4.0 library names
 ln -sf /usr/lib/x86_64-linux-gnu/libwebkit2gtk-4.1.so /usr/lib/x86_64-linux-gnu/libwebkit2gtk-4.0.so
 ln -sf /usr/lib/x86_64-linux-gnu/libjavascriptcoregtk-4.1.so /usr/lib/x86_64-linux-gnu/libjavascriptcoregtk-4.0.so
