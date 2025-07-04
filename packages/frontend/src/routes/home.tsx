@@ -5,6 +5,7 @@ import { useStore } from '../state/useStore';
 
 export default function Home() {
   const [stats, setStats] = useState<string>('');
+  const [devices, setDevices] = useState<string[]>([]);
   const tracks = useStore((state) => state.tracks);
   const addTrack = useStore((state) => state.addTrack);
   const removeTrack = useStore((state) => state.removeTrack);
@@ -14,11 +15,24 @@ export default function Home() {
     setStats(result);
   }
 
+  async function getDevices() {
+    const result = await invoke<string[]>('list_audio_devices');
+    setDevices(result);
+  }
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Bitmxr</h1>
-      <Button onClick={getStats}>Get Audio Stats</Button>
+      <Button onClick={getStats} className="mr-2">Get Audio Stats</Button>
+      <Button onClick={getDevices}>List Audio Devices</Button>
       {stats && <p className="mt-2">{stats}</p>}
+      {devices.length > 0 && (
+        <ul className="mt-2 list-disc list-inside">
+          {devices.map((d) => (
+            <li key={d}>{d}</li>
+          ))}
+        </ul>
+      )}
       <div className="mt-4">
         <Button onClick={() => addTrack({ id: Date.now().toString(), name: `Track ${tracks.length + 1}` })}>
           Add Track
