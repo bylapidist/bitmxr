@@ -1,8 +1,11 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use tauri::Manager;
+use bitmxr::{audio_engine::AudioEngine, get_audio_stats as get_audio_stats_impl};
 
-use bitmxr::{audio_engine::AudioEngine, get_audio_stats};
+#[tauri::command]
+fn get_audio_stats() -> String {
+    get_audio_stats_impl()
+}
 
 fn main() {
     tauri::Builder::default()
