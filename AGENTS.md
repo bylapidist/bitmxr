@@ -24,7 +24,7 @@ Install JS dependencies and browsers once:
 
 ```bash
 pnpm install
-pnpm --filter frontend exec playwright install
+pnpm --filter frontend exec playwright install --with-deps
 ```
 
 No icon file is stored in the repo. The build script will generate a minimal icon at
@@ -42,3 +42,8 @@ cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings
 cargo test --manifest-path src-tauri/Cargo.toml
 pnpm tauri build
 ```
+
+Before opening a pull request, run each command in the check suite above locally.
+These commands mirror the CI workflow in `.github/workflows/ci.yml` and must all
+complete without errors. Use `pnpm install --frozen-lockfile` if your
+dependencies need to be installed again.
