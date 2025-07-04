@@ -8,20 +8,39 @@ This repository contains a monorepo layout with the frontend and backend in a si
 - `packages/frontend` – React + TypeScript frontend powered by Vite
 - `src-tauri` – Rust backend using Tauri
 
-## Development
+## Prerequisites
 
-Install dependencies using `pnpm` and Rust toolchain via `rustup`.
+This project uses the [pnpm](https://pnpm.io/) package manager and the Rust toolchain.
+If you do not already have Rust installed, use `rustup` to install the stable
+toolchain:
+
+```bash
+curl https://sh.rustup.rs -sSf | sh
+rustup install stable
+```
+
+With Rust available, install the JavaScript dependencies with pnpm:
 
 ```bash
 pnpm install
-pnpm --filter frontend dev
-pnpm --filter frontend storybook
 ```
 
-To run the desktop application with hot reload:
+## Development
+
+Start the Vite development server for the frontend and run the Tauri backend in
+watch mode:
 
 ```bash
+pnpm --filter frontend dev
 pnpm tauri dev
+```
+
+### Storybook
+
+Run Storybook to browse UI components in isolation:
+
+```bash
+pnpm --filter frontend storybook
 ```
 
 ## Testing
@@ -32,8 +51,30 @@ pnpm tauri dev
 
 ## Building
 
+To create a production ready desktop build run:
+
 ```bash
+pnpm --filter frontend build
 pnpm tauri build
 ```
 
 See individual package README files for more details.
+
+## Contributing
+
+We welcome pull requests! Please follow these steps when contributing:
+
+1. Fork the repository and create a feature branch.
+2. Make your changes and ensure all checks pass:
+   - `pnpm lint`
+   - `pnpm --filter frontend test -- --run`
+   - `pnpm --filter frontend exec playwright test`
+   - `cargo fmt --manifest-path src-tauri/Cargo.toml --all`
+   - `cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings`
+   - `cargo test --manifest-path src-tauri/Cargo.toml`
+3. Open a pull request against the `main` branch with a clear description of your changes.
+
+### Coding style
+
+TypeScript and JavaScript code is formatted with Prettier and checked with ESLint.
+Rust code is formatted with `rustfmt` and linted using `clippy`.
