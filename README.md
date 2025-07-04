@@ -58,6 +58,12 @@ pnpm --filter frontend build
 pnpm tauri build
 ```
 
+### Listing audio devices
+
+From the application home page you can click **List Audio Devices** to invoke the
+`list_audio_devices` Tauri command. This will show the names of available input
+and output devices detected on your system.
+
 See individual package README files for more details.
 
 ## Contributing
