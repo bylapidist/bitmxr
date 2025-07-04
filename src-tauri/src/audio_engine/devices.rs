@@ -18,7 +18,7 @@ impl DeviceManager {
         if let Ok(inputs) = host.input_devices() {
             for device in inputs {
                 if let Ok(name) = device.name() {
-                    devices.push(format!("Input: {}", name));
+                    devices.push(format!("Input: {name}"));
                 }
             }
         }
@@ -26,7 +26,7 @@ impl DeviceManager {
         if let Ok(outputs) = host.output_devices() {
             for device in outputs {
                 if let Ok(name) = device.name() {
-                    devices.push(format!("Output: {}", name));
+                    devices.push(format!("Output: {name}"));
                 }
             }
         }
