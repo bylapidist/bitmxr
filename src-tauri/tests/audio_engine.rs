@@ -5,5 +5,6 @@ fn create_engine() {
     let engine = AudioEngine::new();
     // placeholder assert
     // The engine is currently an empty struct so just ensure construction
-    assert!(std::mem::size_of_val(&engine) >= 0);
+    // With no fields the engine should have zero size
+    assert_eq!(std::mem::size_of_val(&engine), 0);
 }
