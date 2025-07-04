@@ -15,6 +15,7 @@ Install dependencies using `pnpm` and Rust toolchain via `rustup`.
 ```bash
 pnpm install
 pnpm --filter frontend dev
+pnpm --filter frontend storybook
 ```
 
 To run the desktop application with hot reload:
