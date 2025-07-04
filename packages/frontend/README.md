@@ -1,6 +1,7 @@
 # Frontend
 
 This package contains the React + TypeScript frontend for Bitmxr built with Vite and TailwindCSS.
+Routing is handled via React Router's `HashRouter`, which means URLs include a `#` fragment (e.g. `/#/`).
 
 ## Scripts
 
