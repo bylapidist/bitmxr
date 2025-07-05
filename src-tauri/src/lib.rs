@@ -9,3 +9,8 @@ pub fn get_audio_stats() -> String {
 pub fn list_audio_devices() -> Vec<String> {
     audio_engine::devices::DeviceManager::list()
 }
+
+/// Set the application's active audio device by identifier.
+pub fn set_audio_device(id: &str) {
+    audio_engine::devices::DeviceManager::set_default(id);
+}
