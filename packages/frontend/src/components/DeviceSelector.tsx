@@ -20,7 +20,7 @@ export default function DeviceSelector({ devices }: Props) {
       const { device } = schema.parse({ device: value ?? '' });
       try {
         await invoke('set_audio_device', { id: device });
-      } catch (_) {
+      } catch {
         // ignore invoke errors in non-tauri environments
       }
       setDevice({ id: device, name: device });

@@ -20,9 +20,9 @@ export default function Home() {
     try {
       const result = await invoke<string[]>('list_audio_devices');
       setDevices(result);
-    } catch (_) {
-      // ignore errors in non-tauri environments
-    }
+      } catch {
+        // ignore errors in non-tauri environments
+      }
   }
 
   useEffect(() => {
