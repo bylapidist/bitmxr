@@ -25,6 +25,14 @@ With Rust available, install the JavaScript dependencies with pnpm:
 pnpm install
 ```
 
+Copy `.env.example` to `.env` and adjust variables like `VITE_API_URL` for your
+environment:
+
+```bash
+cp .env.example .env
+# then edit .env to match your setup
+```
+
 ## Development
 
 Start the Vite development server for the frontend and run the Tauri backend in
