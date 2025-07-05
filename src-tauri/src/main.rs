@@ -2,7 +2,8 @@
 
 use bitmxr::{
     audio_engine::AudioEngine, get_audio_stats as get_audio_stats_impl,
-    list_audio_devices as list_audio_devices_impl, set_audio_device as set_audio_device_impl,
+    list_audio_devices as list_audio_devices_impl, list_plugins as list_plugins_impl,
+    set_audio_device as set_audio_device_impl, Plugin,
 };
 
 #[tauri::command]
@@ -13,6 +14,11 @@ fn get_audio_stats() -> String {
 #[tauri::command]
 fn list_audio_devices() -> Vec<String> {
     list_audio_devices_impl()
+}
+
+#[tauri::command]
+fn list_plugins() -> Vec<Plugin> {
+    list_plugins_impl()
 }
 
 #[tauri::command]
@@ -27,7 +33,8 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             get_audio_stats,
             list_audio_devices,
-            set_audio_device
+            set_audio_device,
+            list_plugins
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
