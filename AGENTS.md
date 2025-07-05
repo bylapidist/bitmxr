@@ -41,7 +41,6 @@ pnpm --filter frontend build
 cargo fmt --manifest-path src-tauri/Cargo.toml --all
 cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings
 cargo test --manifest-path src-tauri/Cargo.toml
-pnpm tauri build
 ```
 
 Before opening a pull request, run each command in the check suite above locally.
