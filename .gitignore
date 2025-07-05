@@ -27,3 +27,4 @@ src-tauri/icons/
 
 *storybook.log
 storybook-static
+/src-tauri/gen/
