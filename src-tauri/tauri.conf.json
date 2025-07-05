@@ -1,24 +1,20 @@
 {
+  "product-name": "Bitmxr",
+  "identifier": "com.example.bitmxr",
+  "version": "0.1.0",
   "build": {
-    "beforeBuildCommand": "pnpm --filter frontend build",
-    "beforeDevCommand": "pnpm --filter frontend dev",
-    "devPath": "http://localhost:5173",
-    "distDir": "../packages/frontend/dist"
+    "before-build-command": "pnpm --filter frontend build",
+    "before-dev-command": "pnpm --filter frontend dev",
+    "dev-url": "http://localhost:5173",
+    "frontend-dist": "../packages/frontend/dist"
   },
-  "package": {
-    "productName": "Bitmxr",
-    "version": "0.1.0"
-  },
-  "tauri": {
+  "app": {
     "windows": [
       {
         "title": "Bitmxr",
         "width": 1200,
         "height": 800
       }
-    ],
-    "allowlist": {
-      "all": true
-    }
+    ]
   }
 }
