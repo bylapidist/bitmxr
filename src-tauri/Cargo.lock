@@ -160,6 +160,7 @@ name = "bitmxr"
 version = "0.1.0"
 dependencies = [
  "cpal",
+ "plist",
  "serde",
  "serde_json",
  "tauri",

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 
 export interface Plugin {
   name: string;
+  vendor: string;
+  version: string;
   path: string;
 }
 
@@ -32,6 +34,8 @@ export default function PluginList() {
         <Table.Thead>
           <Table.Tr>
             <Table.Th>Name</Table.Th>
+            <Table.Th>Vendor</Table.Th>
+            <Table.Th>Version</Table.Th>
             <Table.Th>Path</Table.Th>
           </Table.Tr>
         </Table.Thead>
@@ -39,12 +43,14 @@ export default function PluginList() {
           {plugins.map((p) => (
             <Table.Tr key={p.path}>
               <Table.Td>{p.name}</Table.Td>
+              <Table.Td>{p.vendor}</Table.Td>
+              <Table.Td>{p.version}</Table.Td>
               <Table.Td>{p.path}</Table.Td>
             </Table.Tr>
           ))}
           {plugins.length === 0 && (
             <Table.Tr>
-              <Table.Td colSpan={2}>
+              <Table.Td colSpan={4}>
                 <Text c="dimmed">No plugins found</Text>
               </Table.Td>
             </Table.Tr>

@@ -2,14 +2,17 @@
 
 use std::env;
 use std::fs;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
+use plist::Value;
 use serde::Serialize;
 
 /// Representation of a discovered plugin on disk.
 #[derive(Debug, Clone, Serialize, PartialEq, Eq)]
 pub struct Plugin {
     pub name: String,
+    pub vendor: String,
+    pub version: String,
     pub path: PathBuf,
 }
 
@@ -31,12 +34,21 @@ impl PluginHost {
                 for entry in entries.flatten() {
                     let path = entry.path();
                     if path.extension().and_then(|e| e.to_str()) == Some("vst3") {
-                        let name = path
-                            .file_stem()
-                            .and_then(|s| s.to_str())
-                            .unwrap_or_default()
-                            .to_string();
-                        plugins.push(Plugin { name, path });
+                        let (name, vendor, version) =
+                            Self::read_metadata(&path).unwrap_or_else(|| {
+                                let n = path
+                                    .file_stem()
+                                    .and_then(|s| s.to_str())
+                                    .unwrap_or_default()
+                                    .to_string();
+                                (n, String::new(), String::new())
+                            });
+                        plugins.push(Plugin {
+                            name,
+                            vendor,
+                            version,
+                            path,
+                        });
                     }
                 }
             }
@@ -82,5 +94,38 @@ impl PluginHost {
         }
 
         dirs
+    }
+
+    fn read_metadata(path: &Path) -> Option<(String, String, String)> {
+        if path.is_dir() {
+            let candidates = [path.join("Contents/Info.plist"), path.join("Info.plist")];
+            for info in candidates.iter() {
+                if info.exists() {
+                    if let Ok(value) = Value::from_file(info) {
+                        if let Some(dict) = value.as_dictionary() {
+                            let name = dict
+                                .get("CFBundleName")
+                                .and_then(Value::as_string)
+                                .unwrap_or_default()
+                                .to_string();
+                            let vendor = dict
+                                .get("Manufacturer")
+                                .or_else(|| dict.get("CFBundleIdentifier"))
+                                .and_then(Value::as_string)
+                                .unwrap_or_default()
+                                .to_string();
+                            let version = dict
+                                .get("CFBundleShortVersionString")
+                                .or_else(|| dict.get("CFBundleVersion"))
+                                .and_then(Value::as_string)
+                                .unwrap_or_default()
+                                .to_string();
+                            return Some((name, vendor, version));
+                        }
+                    }
+                }
+            }
+        }
+        None
     }
 }
