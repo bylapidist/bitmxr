@@ -1,12 +1,13 @@
 {
-  "product-name": "Bitmxr",
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "Bitmxr",
   "identifier": "com.example.bitmxr",
   "version": "0.1.0",
   "build": {
-    "before-build-command": "pnpm --filter frontend build",
-    "before-dev-command": "pnpm --filter frontend dev",
-    "dev-url": "http://localhost:5173",
-    "frontend-dist": "../packages/frontend/dist"
+    "beforeBuildCommand": "pnpm --filter frontend build",
+    "beforeDevCommand": "pnpm --filter frontend dev",
+    "devUrl": "http://localhost:5173",
+    "frontendDist": "../packages/frontend/dist"
   },
   "app": {
     "windows": [
