@@ -10,7 +10,10 @@ This repository contains a monorepo layout with the frontend and backend in a si
 
 ## Prerequisites
 
-This project uses the [pnpm](https://pnpm.io/) package manager and the Rust toolchain.
+This project uses Node.js **22**, the [pnpm](https://pnpm.io/) package manager and the Rust toolchain.
+The repository includes an `.nvmrc` file specifying the required Node version.
+If you have [nvm](https://github.com/nvm-sh/nvm) installed, run `nvm use` in the
+project root to automatically select Node 22.
 If you do not already have Rust installed, use `rustup` to install the stable
 toolchain:
 
