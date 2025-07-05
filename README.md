@@ -75,6 +75,7 @@ We welcome pull requests! Please follow these steps when contributing:
    - `pnpm lint`
    - `pnpm --filter frontend test -- --run`
    - `pnpm --filter frontend exec playwright test`
+   - `pnpm --filter frontend build`
    - `cargo fmt --manifest-path src-tauri/Cargo.toml --all`
    - `cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings`
    - `cargo test --manifest-path src-tauri/Cargo.toml`
