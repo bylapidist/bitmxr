@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import DeviceSelector from '../components/DeviceSelector';
 
-vi.mock('@tauri-apps/api/tauri', () => ({ invoke: vi.fn() }));
+vi.mock('@tauri-apps/api/core', () => ({ invoke: vi.fn() }));
 
 describe('DeviceSelector', () => {
   beforeAll(() => {

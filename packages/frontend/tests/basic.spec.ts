@@ -2,12 +2,13 @@ import { expect, test } from '@playwright/test';
 
 test('home page loads and selects device', async ({ page }) => {
   await page.addInitScript(() => {
-    window.__TAURI_IPC__ = ({ cmd, callback }) => {
-      if (cmd === 'list_audio_devices') {
-        window[`_${callback}`](['Test Device']);
-      } else {
-        window[`_${callback}`](null);
-      }
+    window.__TAURI_INTERNALS__ = {
+      invoke: (cmd) => {
+        if (cmd === 'list_audio_devices') {
+          return Promise.resolve(['Test Device']);
+        }
+        return Promise.resolve();
+      },
     };
   });
 
