@@ -34,7 +34,12 @@ describe('PluginList', () => {
 
   it('renders plugins from invoke', async () => {
     mockedInvoke.mockResolvedValueOnce([
-      { name: 'Test', path: '/test.vst3' },
+      {
+        name: 'Test',
+        vendor: 'Vend',
+        version: '1.0.0',
+        path: '/test.vst3',
+      },
     ]);
     render(
       <MantineProvider>
@@ -42,6 +47,8 @@ describe('PluginList', () => {
       </MantineProvider>
     );
     expect(await screen.findByText('Test')).toBeTruthy();
+    expect(screen.getByText('Vend')).toBeTruthy();
+    expect(screen.getByText('1.0.0')).toBeTruthy();
     expect(screen.getByText('/test.vst3')).toBeTruthy();
   });
 
@@ -54,7 +61,12 @@ describe('PluginList', () => {
     );
 
     mockedInvoke.mockResolvedValueOnce([
-      { name: 'Other', path: '/other.vst3' },
+      {
+        name: 'Other',
+        vendor: 'Vend',
+        version: '0.0.1',
+        path: '/other.vst3',
+      },
     ]);
 
     fireEvent.click(screen.getAllByRole('button', { name: /rescan/i })[0]);
