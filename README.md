@@ -47,6 +47,26 @@ sudo ln -sf /usr/lib/x86_64-linux-gnu/pkgconfig/webkit2gtk-web-extension-4.1.pc 
 sudo ln -sf /usr/lib/x86_64-linux-gnu/pkgconfig/javascriptcoregtk-4.1.pc /usr/lib/x86_64-linux-gnu/pkgconfig/javascriptcoregtk-4.0.pc
 ```
 
+### macOS
+
+Install the Tauri prerequisites using Homebrew:
+
+```bash
+brew install webkit2gtk gtk+3
+```
+
+### Windows
+
+Install the **Visual Studio Build Tools** with the C++ workload and the
+WebView2 runtime. You can install the runtime with:
+
+```powershell
+winget install Microsoft.EdgeWebView2Runtime
+```
+
+The installer is also available from
+<https://developer.microsoft.com/en-us/microsoft-edge/webview2/>.
+
 ## Development
 
 Start the app in development mode using a single command:
