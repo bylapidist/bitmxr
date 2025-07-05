@@ -1,7 +1,11 @@
 //! Audio device handling using cpal
 
+use std::sync::{Mutex, OnceLock};
+
 #[derive(Default)]
 pub struct DeviceManager {}
+
+static DEFAULT_DEVICE: OnceLock<Mutex<Option<String>>> = OnceLock::new();
 
 impl DeviceManager {
     pub fn new() -> Self {
@@ -32,5 +36,20 @@ impl DeviceManager {
         }
 
         devices
+    }
+
+    /// Set the default audio device identifier used by the application.
+    pub fn set_default(id: &str) {
+        let lock = DEFAULT_DEVICE.get_or_init(|| Mutex::new(None));
+        *lock.lock().unwrap() = Some(id.to_string());
+    }
+
+    /// Retrieve the currently selected audio device identifier, if any.
+    pub fn current() -> Option<String> {
+        DEFAULT_DEVICE
+            .get_or_init(|| Mutex::new(None))
+            .lock()
+            .unwrap()
+            .clone()
     }
 }
