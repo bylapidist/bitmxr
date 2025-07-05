@@ -16,6 +16,8 @@ node_modules/
 # Builds
 /dist/
 /packages/frontend/dist/
+packages/frontend/test-results/
+src-tauri/icons/
 
 # Env
 .env
