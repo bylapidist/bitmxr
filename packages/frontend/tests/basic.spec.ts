@@ -15,7 +15,9 @@ test('home page loads and selects device', async ({ page }) => {
   await page.goto('/#/');
   await expect(page).toHaveTitle(/Bitmxr/);
 
-  await page.getByRole('combobox').click();
+  const input = page.getByRole('textbox', { name: 'Select device' });
+  await input.waitFor();
+  await input.click();
   await page.getByRole('option', { name: 'Test Device' }).click();
   await page.getByRole('button', { name: /set device/i }).click();
 

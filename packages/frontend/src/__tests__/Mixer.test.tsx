@@ -1,10 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, beforeEach, beforeAll, vi, expect } from 'vitest';
+import { MantineProvider } from '@mantine/core';
 import Mixer from '../components/Mixer';
 import { useStore } from '../state/useStore';
 
 describe('Mixer', () => {
   beforeAll(() => {
+    class RO {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    }
+    // @ts-expect-error -- polyfill for testing
+    global.ResizeObserver = RO;
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
@@ -25,7 +33,11 @@ describe('Mixer', () => {
   });
 
   it('renders track names', () => {
-    render(<Mixer />);
+    render(
+      <MantineProvider>
+        <Mixer />
+      </MantineProvider>
+    );
     expect(screen.getByText('Track 1')).toBeTruthy();
   });
 });
