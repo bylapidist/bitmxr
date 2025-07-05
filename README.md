@@ -49,13 +49,13 @@ sudo ln -sf /usr/lib/x86_64-linux-gnu/pkgconfig/javascriptcoregtk-4.1.pc /usr/li
 
 ## Development
 
-Start the Vite development server for the frontend and run the Tauri backend in
-watch mode:
+Start the app in development mode using a single command:
 
 ```bash
-pnpm --filter frontend dev
-pnpm tauri dev
+pnpm dev      # runs tauri dev, which starts the frontend automatically
 ```
+
+Use the Tauri window rather than a regular browser to access backend commands.
 
 ### Storybook
 
