@@ -12,7 +12,7 @@ describe('DeviceSelector', () => {
       unobserve() {}
       disconnect() {}
     }
-    // @ts-ignore
+    // @ts-expect-error -- polyfill for testing
     global.ResizeObserver = RO;
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
