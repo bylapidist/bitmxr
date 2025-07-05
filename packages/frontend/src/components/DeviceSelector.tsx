@@ -1,5 +1,5 @@
 import { Button, Select, Text } from '@mantine/core';
-import { invoke } from '@tauri-apps/api/tauri';
+import { invoke } from '@tauri-apps/api/core';
 import { useState } from 'react';
 import { z } from 'zod';
 import { useStore } from '../state/useStore';
@@ -20,7 +20,7 @@ export default function DeviceSelector({ devices }: Props) {
       const { device } = schema.parse({ device: value ?? '' });
       try {
         await invoke('set_audio_device', { id: device });
-      } catch (_) {
+      } catch {
         // ignore invoke errors in non-tauri environments
       }
       setDevice({ id: device, name: device });

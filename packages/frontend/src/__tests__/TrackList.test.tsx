@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { MantineProvider } from '@mantine/core';
 import { describe, it, beforeEach, beforeAll, vi, expect } from 'vitest';
 import TrackList from '../components/TrackList';
 import { useStore } from '../state/useStore';
@@ -18,6 +19,11 @@ describe('TrackList', () => {
         dispatchEvent: vi.fn(),
       })),
     });
+    global.ResizeObserver = class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    };
   });
 
   beforeEach(() => {
@@ -25,7 +31,11 @@ describe('TrackList', () => {
   });
 
   it('renders without crashing', () => {
-    render(<TrackList />);
+    render(
+      <MantineProvider>
+        <TrackList />
+      </MantineProvider>
+    );
     expect(screen.getByText('Add Track')).toBeTruthy();
   });
 });

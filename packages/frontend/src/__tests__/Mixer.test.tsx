@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { MantineProvider } from '@mantine/core';
 import { describe, it, beforeEach, beforeAll, vi, expect } from 'vitest';
 import Mixer from '../components/Mixer';
 import { useStore } from '../state/useStore';
@@ -18,6 +19,11 @@ describe('Mixer', () => {
         dispatchEvent: vi.fn(),
       })),
     });
+    global.ResizeObserver = class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    };
   });
 
   beforeEach(() => {
@@ -25,7 +31,11 @@ describe('Mixer', () => {
   });
 
   it('renders track names', () => {
-    render(<Mixer />);
+    render(
+      <MantineProvider>
+        <Mixer />
+      </MantineProvider>
+    );
     expect(screen.getByText('Track 1')).toBeTruthy();
   });
 });

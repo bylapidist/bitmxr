@@ -1,5 +1,5 @@
 import { Button, Text } from '@mantine/core';
-import { invoke } from '@tauri-apps/api/tauri';
+import { invoke } from '@tauri-apps/api/core';
 import { useEffect, useState } from 'react';
 import TrackList from '../components/TrackList';
 import Mixer from '../components/Mixer';
@@ -20,7 +20,7 @@ export default function Home() {
     try {
       const result = await invoke<string[]>('list_audio_devices');
       setDevices(result);
-    } catch (_) {
+    } catch {
       // ignore errors in non-tauri environments
     }
   }
