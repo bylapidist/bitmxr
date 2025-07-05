@@ -1,10 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, beforeEach, beforeAll, vi, expect } from 'vitest';
+import { MantineProvider } from '@mantine/core';
 import TrackList from '../components/TrackList';
 import { useStore } from '../state/useStore';
 
 describe('TrackList', () => {
   beforeAll(() => {
+    class RO {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    }
+    // @ts-ignore
+    global.ResizeObserver = RO;
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
@@ -25,7 +33,11 @@ describe('TrackList', () => {
   });
 
   it('renders without crashing', () => {
-    render(<TrackList />);
+    render(
+      <MantineProvider>
+        <TrackList />
+      </MantineProvider>
+    );
     expect(screen.getByText('Add Track')).toBeTruthy();
   });
 });
