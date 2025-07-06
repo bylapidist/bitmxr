@@ -20,11 +20,21 @@ pub struct Plugin {
 pub struct PluginHost {}
 
 impl PluginHost {
+    /// Create a new [`PluginHost`].
+    ///
+    /// # Returns
+    /// A host instance with no plugins loaded.
     pub fn new() -> Self {
         Self::default()
     }
 
     /// Scan the system for available VST3 plugins.
+    ///
+    /// The directories searched are platform specific and may also be
+    /// overridden using the `BITMXR_VST3_DIRS` environment variable.
+    ///
+    /// # Returns
+    /// A collection of [`Plugin`] entries describing each discovered plugin.
     pub fn scan() -> Vec<Plugin> {
         let dirs = Self::plugin_dirs();
         let mut plugins = Vec::new();
