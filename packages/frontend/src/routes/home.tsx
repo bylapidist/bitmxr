@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import TrackList from '../components/TrackList';
 import Mixer from '../components/Mixer';
 import DeviceSelector from '../components/DeviceSelector';
+import ThemeToggle from '../components/ThemeToggle';
 import { useStore } from '../state/useStore';
 
 export default function Home() {
@@ -31,7 +32,10 @@ export default function Home() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Bitmxr</h1>
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-2xl font-bold">Bitmxr</h1>
+        <ThemeToggle />
+      </div>
       <Button onClick={getStats} className="mr-2">Get Audio Stats</Button>
       {stats && <p className="mt-2">{stats}</p>}
       <div className="mt-4">
