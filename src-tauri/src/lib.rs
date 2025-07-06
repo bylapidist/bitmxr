@@ -1,5 +1,8 @@
 pub mod audio_engine;
+pub mod project;
+
 pub use audio_engine::plugins::Plugin;
+pub use project::{load_project, save_project, Project, Track};
 
 /// Return placeholder audio statistics used by the Tauri commands.
 ///
@@ -40,4 +43,24 @@ pub fn set_audio_device(id: &str) {
 /// disk.
 pub fn list_plugins() -> Vec<Plugin> {
     audio_engine::plugins::PluginHost::scan()
+}
+
+/// Save a project definition to disk.
+///
+/// # Arguments
+/// * `path` - Destination file path.
+/// * `project` - Project data to persist.
+pub fn save_project_file(path: &std::path::Path, project: &Project) -> std::io::Result<()> {
+    project::save_project(path, project)
+}
+
+/// Load a project definition from disk.
+///
+/// # Arguments
+/// * `path` - Source file path.
+///
+/// # Returns
+/// Parsed [`Project`] structure on success.
+pub fn load_project_file(path: &std::path::Path) -> std::io::Result<Project> {
+    project::load_project(path)
 }

@@ -18,6 +18,7 @@ interface StoreState {
   colorScheme: ColorScheme;
   addTrack: (track: Track) => void;
   removeTrack: (id: string) => void;
+  setTracks: (tracks: Track[]) => void;
   setDevice: (device: AudioDevice) => void;
   toggleColorScheme: () => void;
 }
@@ -30,6 +31,7 @@ export const useStore = create<StoreState>((set) => ({
     set((state) => ({ tracks: [...state.tracks, track] })),
   removeTrack: (id) =>
     set((state) => ({ tracks: state.tracks.filter((t) => t.id !== id) })),
+  setTracks: (tracks) => set({ tracks }),
   setDevice: (device) => set({ selectedDevice: device }),
   toggleColorScheme: () =>
     set((state) => ({ colorScheme: state.colorScheme === 'light' ? 'dark' : 'light' })),
