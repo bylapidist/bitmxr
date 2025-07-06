@@ -16,5 +16,14 @@ describe('store', () => {
     useStore.getState().removeTrack('1');
     expect(useStore.getState().tracks).toHaveLength(0);
   });
+
+  it('sets track list', () => {
+    useStore.getState().setTracks([
+      { id: '2', name: 'A' },
+      { id: '3', name: 'B' },
+    ]);
+    expect(useStore.getState().tracks).toHaveLength(2);
+    expect(useStore.getState().tracks[0].name).toBe('A');
+  });
 });
 
