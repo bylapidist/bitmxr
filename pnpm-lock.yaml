@@ -26,6 +26,9 @@ importers:
       '@mantine/notifications':
         specifier: ^8.1.2
         version: 8.1.2(@mantine/core@8.1.2(@mantine/hooks@8.1.2(react@19.1.0))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@mantine/hooks@8.1.2(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@tabler/icons-react':
+        specifier: ^2.36.0
+        version: 2.47.0(react@19.1.0)
       '@tauri-apps/api':
         specifier: ^2.6.0
         version: 2.6.0
@@ -732,6 +735,14 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  '@tabler/icons-react@2.47.0':
+    resolution: {integrity: sha512-iqly2FvCF/qUbgmvS8E40rVeYY7laltc5GUjRxQj59DuX0x/6CpKHTXt86YlI2whg4czvd/c8Ce8YR08uEku0g==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+
+  '@tabler/icons@2.47.0':
+    resolution: {integrity: sha512-4w5evLh+7FUUiA1GucvGj2ReX2TvOjEr4ejXdwL/bsjoSkof6r1gQmzqI+VHrE2CpJpB3al7bCTulOkFa/RcyA==}
 
   '@tailwindcss/node@4.1.11':
     resolution: {integrity: sha512-yzhzuGRmv5QyU9qLNg4GTlYI6STedBWRE7NjxP45CsFYYq9taI0zJXZBMqIC/c8fViNLhmrbpSFS57EoxUmD6Q==}
@@ -3395,6 +3406,14 @@ snapshots:
       storybook: 9.0.15(@testing-library/dom@10.4.0)(prettier@3.6.2)
     optionalDependencies:
       typescript: 5.8.3
+
+  '@tabler/icons-react@2.47.0(react@19.1.0)':
+    dependencies:
+      '@tabler/icons': 2.47.0
+      prop-types: 15.8.1
+      react: 19.1.0
+
+  '@tabler/icons@2.47.0': {}
 
   '@tailwindcss/node@4.1.11':
     dependencies:
